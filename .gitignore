@@ -1,7 +1,4 @@
 node_modules/
-builds/
-*.vsix
-*.vsix.map
 
 .vscode-test/
 *.log
