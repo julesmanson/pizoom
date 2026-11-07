@@ -1,0 +1,70 @@
+{
+    "name": "pizoom",
+    "displayName": "PiZoom",
+    "description": "Compact zoom controls in the status bar, configurable via a sidebar panel.",
+    "version": "0.1.8",
+    "publisher": "pizoom",
+    "icon": "assets/images/python-logo.png",
+    "engines": { "vscode": "^1.80.0" },
+    "categories": ["Other"],
+    "activationEvents": ["onStartupFinished"],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            { "command": "pizoom.zoomOut",       "title": "PiZoom: Zoom Out",   "icon": "$(pizoom-minus)" },
+            { "command": "pizoom.zoomReset",     "title": "PiZoom: Reset Zoom", "icon": "$(pizoom-reset)" },
+            { "command": "pizoom.zoomIn",        "title": "PiZoom: Zoom In",    "icon": "$(pizoom-plus)" },
+            { "command": "pizoom.toggleEnabled", "title": "PiZoom: Start / Stop" }
+        ],
+        "icons": {
+            "pizoom-minus": {
+                "description": "PiZoom zoom out",
+                "default": { "fontPath": "assets/fonts/vscode.woff", "fontCharacter": "\\E900" }
+            },
+            "pizoom-reset": {
+                "description": "PiZoom reset zoom",
+                "default": { "fontPath": "assets/fonts/vscode.woff", "fontCharacter": "\\E901" }
+            },
+            "pizoom-plus": {
+                "description": "PiZoom zoom in",
+                "default": { "fontPath": "assets/fonts/vscode.woff", "fontCharacter": "\\E902" }
+            }
+        },
+        "viewsContainers": {
+            "activitybar": [
+                { "id": "pizoomContainer", "title": "PiZoom", "icon": "assets/svg/pi-icon.svg" }
+            ]
+        },
+        "views": {
+            "pizoomContainer": [
+                { "id": "pizoomPanel", "name": "PiZoom", "type": "webview" }
+            ]
+        },
+        "configuration": {
+            "title": "PiZoom",
+            "properties": {
+                "pizoom.enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Master on/off switch, also toggled by the Start/Stop button in the PiZoom sidebar panel. When off, nothing is rendered."
+                },
+                "pizoom.statusbarSide": {
+                    "type": "string",
+                    "enum": ["left", "right"],
+                    "default": "left",
+                    "description": "Which side of the status bar PiZoom's controls appear on."
+                },
+                "pizoom.useButtonsStatusbar": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Use the custom pizoom icon-font buttons instead of the default plain-text glyphs."
+                },
+                "pizoom.increment": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "How much window.zoomLevel changes per click of minus/plus. Falls back to 1 if the value present isn't a number."
+                }
+            }
+        }
+    }
+}
